@@ -59,7 +59,7 @@ public class WorkerThread extends Thread {
             try {
                 output = "";
                 try {
-                    command = in.readLine().toLowerCase();
+                    command = in.readLine();
                     if (isInterrupted())
                         throw new InterruptedException();
                 }
@@ -80,14 +80,14 @@ public class WorkerThread extends Thread {
 
                 if (tokens.length == 2) {
                     // we actually have a command
-                    String parameter = tokens[1];
+                    String parameter = tokens[1].toLowerCase();
                     //int secondParameter = Integer.parseInt(tokens[2]);
 
                     switch (tokens[0]) {
-                        case "insertString":
+                        case "insertstring":
                             output = "" + _threadPool.getTrie().insertString(parameter);
                             break;
-                        case "findWord":
+                        case "findword":
                             output = "" +  _threadPool.getTrie().findWord(parameter);
                             break;
                         default:
