@@ -15,7 +15,7 @@ public class Trie {
 	}
 
 	public int insertString(String s) {
-		insertString(root, s);
+		return insertString(root, s);
 	}
 	
 	private int insertString(TrieNode root, String s) {
