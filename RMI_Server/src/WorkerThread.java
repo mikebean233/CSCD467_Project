@@ -78,35 +78,25 @@ public class WorkerThread extends Thread {
 
                 tokens = command.split(",");
 
-
-                if (tokens.length < 3 || tokens.length > 3)
-                    output = "Error processing command: " + command;
-
-                if (tokens.length == 3) {
+                if (tokens.length == 2) {
                     // we actually have a command
-                    int firstParameter = Integer.parseInt(tokens[1]);
-                    int secondParameter = Integer.parseInt(tokens[2]);
+                    String parameter = tokens[1];
+                    //int secondParameter = Integer.parseInt(tokens[2]);
 
                     switch (tokens[0]) {
-                        case "add":
-                            output = "" + (firstParameter + secondParameter);
+                        case "insertString":
+                            output = "" + _threadPool.getTrie().insertString(parameter);
                             break;
-                        case "sub":
-                            output = "" + (firstParameter - secondParameter);
-                            break;
-                        case "mul":
-                            output = "" + (firstParameter * secondParameter);
-                            break;
-                        case "div":
-                            if (secondParameter == 0)
-                                output = "Error processing command: " + command + " cannot divide by zero";
-                            else
-                                output = "" + (firstParameter / secondParameter);
+                        case "findWord":
+                            output = "" +  _threadPool.getTrie().findWord(parameter);
                             break;
                         default:
                             output = "Unknown command: " + command;
                     }
                 }
+                else
+                    output = "Error processing command: " + command;
+
 
                 if (isInterrupted())
                     throw new InterruptedException();

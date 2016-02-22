@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Trie {
-	
+	private int _size;
 	private class TrieNode {
 		Map<Character, TrieNode> children = new TreeMap<>();//TreeMap is java build-in structure, 
 		boolean aword;			                    //Basically it acts like a Hashtable or Hashmap, establishing a mapping between Key and Value
@@ -11,13 +11,14 @@ public class Trie {
 	private TrieNode root;
 	public Trie() {
 		this.root = new TrieNode();
+		_size = 0;
 	}
 
-	public void insertString(String s) {
+	public int insertString(String s) {
 		insertString(root, s);
 	}
 	
-	private void insertString(TrieNode root, String s) {
+	private int insertString(TrieNode root, String s) {
 		TrieNode cur = root;
 		for (char ch : s.toCharArray()) {
 			TrieNode next = cur.children.get(ch);
@@ -26,6 +27,7 @@ public class Trie {
 			cur = next;
 		}
 		cur.aword = true;
+		return ++_size;
 	}
 	
 	public void printSorted() {
