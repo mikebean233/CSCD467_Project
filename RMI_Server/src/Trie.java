@@ -14,11 +14,11 @@ public class Trie {
 		_size = 0;
 	}
 
-	public int insertString(String s) {
-		return insertString(root, s);
+	public int put(String s) {
+		return put(root, s);
 	}
 	
-	private int insertString(TrieNode root, String s) {
+	private int put(TrieNode root, String s) {
 		TrieNode cur = root;
 		for (char ch : s.toCharArray()) {
 			TrieNode next = cur.children.get(ch);
@@ -43,11 +43,11 @@ public class Trie {
 		}
 	}
 	
-	public boolean findWord(String s) {
-		return findWord(root, s);
+	public boolean query(String s) {
+		return query(root, s);
 	}
 	
-	private boolean findWord(TrieNode node, String s) {
+	private boolean query(TrieNode node, String s) {
 		if(s != null) {
 			String rest = s.substring(1);              //rest is a substring of s, by excluding the first character in s
 			char ch = s.charAt(0);                     //ch is the first letter of s
@@ -57,7 +57,7 @@ public class Trie {
 			if(child == null)
 				return false;
 			else
-				return findWord(child, rest);      //recursive, In this way, we follow the path of the trie from root down towards leaf
+				return query(child, rest);      //recursive, In this way, we follow the path of the trie from root down towards leaf
 		}
 		return false;
 	}

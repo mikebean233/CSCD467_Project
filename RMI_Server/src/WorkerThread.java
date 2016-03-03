@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class WorkerThread extends Thread {
     private JobQueue _jobQueue;
@@ -86,11 +85,11 @@ public class WorkerThread extends Thread {
                     //int secondParameter = Integer.parseInt(tokens[2]);
 
                     switch (tokens[0]) {
-                        case "insertstring":
-                            output = "" + _threadPool.getTrie().insertString(parameter);
+                        case "put":
+                            output = "" + _threadPool.getTrie().put(parameter);
                             break;
-                        case "findword":
-                            output = "" +  _threadPool.getTrie().findWord(parameter);
+                        case "query":
+                            output = "" +  _threadPool.getTrie().query(parameter);
                             break;
                         default:
                             output = "Unknown command: " + command;
