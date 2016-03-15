@@ -19,9 +19,11 @@ public class ServerMain {
 
     public static void main(String[] args) throws Exception{
         //String logFileName = (args.length >0) ? args[0] : "";
+        boolean useFs = (args.length > 0 && args[0].equals("-fs") );
+
         ServerSocket listener = new ServerSocket(SOCKET);
         JobQueue jobQueue = new JobQueue(JOB_QUEUE_SIZE);
-        ThreadPool threadPool = new ThreadPool(THREAD_POOL_INITIAL_SIZE, THREAD_POOL_MAX_SIZE, jobQueue, listener, new Trie());
+        ThreadPool threadPool = new ThreadPool(THREAD_POOL_INITIAL_SIZE, THREAD_POOL_MAX_SIZE, jobQueue, listener, new Trie("Test_Trie", useFs));
 
         ThreadManager threadManager = new ThreadManager(threadPool, jobQueue,
                 THREAD_MANAGER_LOW_THRESHOLD,

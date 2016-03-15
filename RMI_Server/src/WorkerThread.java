@@ -85,11 +85,14 @@ public class WorkerThread extends Thread {
                     //int secondParameter = Integer.parseInt(tokens[2]);
 
                     switch (tokens[0]) {
-                        case "put":
-                            output = "" + _threadPool.getTrie().put(parameter);
+                        case "insert":
+                            output = "" + _threadPool.getTrie().insert(parameter);
                             break;
                         case "query":
                             output = "" +  _threadPool.getTrie().query(parameter);
+                            break;
+                        case "toString":
+                            output = "" +  _threadPool.getTrie().toString();
                             break;
                         default:
                             output = "Unknown command: " + command;
